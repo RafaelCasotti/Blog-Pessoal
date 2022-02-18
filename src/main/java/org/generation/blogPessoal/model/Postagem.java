@@ -13,18 +13,18 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
-	@Entity     // entidade
-	@Table(name = "postagem")          // criacao de tabela
+	@Entity    
+	@Table(name = "postagem")         
 	public class Postagem {
 
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)  //chave primaria
+	@GeneratedValue(strategy = GenerationType.IDENTITY)  
 	private long id;
 	
 	
 	@NotNull
-	@Size(min = 5, max = 100)    //minimo e maximo de letras
+	@Size(min = 5, max = 100)    
 	private String titulo;
 	
 	
@@ -33,7 +33,7 @@ import javax.validation.constraints.Size;
 	private String texto;
 	
 	
-	@Temporal(TemporalType.TIMESTAMP)   //data e horas juntos
+	@Temporal(TemporalType.TIMESTAMP)  
 	private Date date = new java.sql.Date(System.currentTimeMillis());
 
 	
