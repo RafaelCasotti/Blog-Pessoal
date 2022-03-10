@@ -91,7 +91,7 @@ public class UsuarioControllerTest {
 		HttpEntity<Usuario> requisicao = new HttpEntity<Usuario>(usuarioUpdate);
 
 		ResponseEntity<Usuario> resposta = testRestTemplate
-			.withBasicAuth("batatinhas", "batatinhas")
+			.withBasicAuth("root", "root")
 			.exchange("/usuarios/atualizar", HttpMethod.PUT, requisicao, Usuario.class);
 
 		assertEquals(HttpStatus.OK, resposta.getStatusCode());
@@ -111,7 +111,7 @@ public class UsuarioControllerTest {
 			"Ricardo Marques", "https://i.imgur.com/Sk5SjWE.jpg", "ricardo_marques@email.com.br", "ricardo123"));
 
 		ResponseEntity<String> resposta = testRestTemplate
-			.withBasicAuth("batatinhas", "batatinhas")
+			.withBasicAuth("root", "root")
 			.exchange("/usuarios/all", HttpMethod.GET, null, String.class);
 
 		assertEquals(HttpStatus.OK, resposta.getStatusCode());
