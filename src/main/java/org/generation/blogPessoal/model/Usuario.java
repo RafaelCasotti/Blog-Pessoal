@@ -6,8 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 
 
@@ -19,22 +22,22 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotNull
+	@NotNull(message = "Digite um nome.")
 	@Size(min = 2, max = 100)
 	private String nome; 
 	
 	@Size(max = 5000)
 	private String foto;
 	
-	@NotNull
+	@Schema(example = "email@email.com.br")
+	@NotNull(message = "Digite um e-mail.")
+	@Email(message = "Digite um e-mail válido.")
 	@Size(min = 5, max = 100)
 	private String usuario;
 	
-	@NotNull
+	@NotNull(message = "Digite uma senha.")
 	@Size(min = 5, max = 100)
 	private String senha;
-	
-
 	
 	public Usuario(long id, String nome, String foto, String usuario, String senha) {
 		super();
