@@ -1,17 +1,18 @@
 package org.generation.blogPessoal.model;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import io.swagger.v3.oas.annotations.media.Schema;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -29,15 +30,17 @@ public class Usuario {
 	@Size(max = 5000)
 	private String foto;
 	
-	@Schema(example = "email@email.com.br")
 	@NotNull(message = "Digite um e-mail.")
 	@Email(message = "Digite um e-mail válido.")
-	@Size(min = 5, max = 100)
 	private String usuario;
 	
-	@NotNull(message = "Digite uma senha.")
-	@Size(min = 5, max = 100)
+	@NotBlank(message = "Digite uma senha.")
+	@Size(min = 8, message = "A Senha deve ter no mínimo 8 caracteres.")
 	private String senha;
+	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("usuario")
+	private List<Postagem> postagem;
 	
 	public Usuario(long id, String nome, String foto, String usuario, String senha) {
 		super();
@@ -90,6 +93,15 @@ public class Usuario {
 		this.senha = senha;
 	}
 
+	public List<Postagem> getPostagem() {
+		return postagem;
+	}
+
+	public void setPostagem(List<Postagem> postagem) {
+		this.postagem = postagem;
+	}
+
+	
 	
 
 

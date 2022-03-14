@@ -15,31 +15,37 @@ import io.swagger.v3.oas.models.responses.ApiResponses;
 public class SwaggerConfig {
 
 	@Bean
-	public OpenAPI springBlogPessoalOpenAPI() {
+	public OpenAPI springOpenAPI() {
 		return new OpenAPI()
-				.info(new Info()
-					.title("Projeto Blog Pessoal")
-					.description("Projeto Blog Pessoal - Generation Brasil")
-					.version("v0.0.1")
-				.license(new License()
-					.name("Generation Brasil")
-					.url("https://brazil.generation.org/"))
-				.contact(new Contact()
-					.name("Rafael Santos Casotti")
-					.url("https://www.linkedin.com/in/rafaelsantoscasotti/")
-					.email("rafa_scasotti@hotmail.com")))
-				.externalDocs(new ExternalDocumentation()
-					.description("RafaelCasotti")
-					.url("https://github.com/RafaelCasotti/Blog-Pessoal"));
+				
+							.info(new Info()
+												.title("Projeto Blog Pessoal")
+												.description("Projeto Blog Pessoal - Generation Brasil")
+												.version("v0.0.1")
+												.license(new License()
+														.name("Generation Brasil")
+														.url("https://brazil.generation.org/"))
+												.contact(new Contact()
+														.name("Rafael Santos Casotti")
+														.url("https://www.linkedin.com/in/rafaelsantoscasotti/")
+														.email("rafa_scasotti@hotmail.com")))
+								.externalDocs(new ExternalDocumentation()
+										.description("RafaelCasotti")
+										.url("https://github.com/RafaelCasotti/Blog-Pessoal"));
+	}
+	
+
+	private ApiResponse createApiResponse(String message) {
+
+		return new ApiResponse().description(message);
+
 	}
 
 	@Bean
 	public OpenApiCustomiser customerGlobalHeaderOpenApiCustomiser() {
-
 		return openApi -> {
 			openApi.getPaths().values().forEach(pathItem -> pathItem.readOperations().forEach(operation -> {
-
-				ApiResponses apiResponses = operation.getResponses();
+					ApiResponses apiResponses = operation.getResponses();
 
 				apiResponses.addApiResponse("200", createApiResponse("Sucesso!"));
 				apiResponses.addApiResponse("201", createApiResponse("Objeto Persistido!"));
@@ -53,10 +59,5 @@ public class SwaggerConfig {
 		};
 	}
 
-	private ApiResponse createApiResponse(String message) {
-
-		return new ApiResponse().description(message);
-
 	}
 	
-}
